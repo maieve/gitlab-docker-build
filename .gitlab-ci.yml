@@ -5,14 +5,11 @@ stages:
 services:
   - docker:dind
 variables:
-  dist: ms-dist-001.hanpda.com:5500
   image: ${CI_PROJECT_NAME}
   DOCKER_DRIVER: overlay2
 swms_deploy:
   stage: deploy
   script:
   - docker ps
-  - docker login -u cafe24 -p $DOCKER_REPO_AUTH $dist
-  - docker build . -t $image
-  - docker tag $image $dist/$image
-  - docker push $dist/$image
+  - docker build . -t $image  
+  - docker push $image
